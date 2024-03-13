@@ -6,6 +6,7 @@ dotenv.config({
 });
 
 const ENV_VARIABLES = {
+  environment: process.env.NODE_ENV,
   PORT: process.env.PORT,
 };
 
