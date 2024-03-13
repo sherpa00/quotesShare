@@ -1,14 +1,23 @@
 import express, { Express, Response, Request, NextFunction } from "express";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import morgan from "morgan";
 import logger, {
   devMorganHttpLogger,
   prodMorganHttpLogger,
 } from "./utils/loggers/customLogger";
 import ENV_VARIABLES from "./configs/env_variables";
-import BadRequestError from "./utils/errors/badRequestError";
+import customErrorHandler from "./middlewares/errorHandler";
 
 // express app instance
 const app: Express = express();
+
+// json and body parser
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 
 // initialize http logging
 if (ENV_VARIABLES.environment === "development") {
@@ -21,16 +30,18 @@ app.get(
   "/apiCheck",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.status(200).json({
+      res.status(StatusCodes.OK).json({
         success: true,
-        message: "Api is stable",
+        status: ReasonPhrases.OK,
+        message: "Api is Stable now",
       });
     } catch (err) {
-      logger.info("Error while getting routes /apiCheck");
-      logger.error(err);
       next(err);
     }
   }
 );
+
+// custom error handler
+app.use(customErrorHandler);
 
 export default app;
