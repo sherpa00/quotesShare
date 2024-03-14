@@ -1,12 +1,11 @@
 import express, { Express, Response, Request, NextFunction } from "express";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import morgan from "morgan";
 import logger, {
   devMorganHttpLogger,
   prodMorganHttpLogger,
 } from "./utils/loggers/customLogger";
 import ENV_VARIABLES from "./configs/env_variables";
 import customErrorHandler from "./middlewares/errorHandler";
+import RootRouter from "./routes/indext";
 
 // express app instance
 const app: Express = express();
@@ -26,20 +25,8 @@ if (ENV_VARIABLES.environment === "development") {
   app.use(prodMorganHttpLogger);
 }
 
-app.get(
-  "/apiCheck",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      res.status(StatusCodes.OK).json({
-        success: true,
-        status: ReasonPhrases.OK,
-        message: "Api is Stable now",
-      });
-    } catch (err) {
-      next(err);
-    }
-  }
-);
+// routes
+app.use(RootRouter);
 
 // custom error handler
 app.use(customErrorHandler);
