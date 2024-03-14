@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/server.ts",
-    "build": "rm -r build && tsc",
+    "build": "tsc",
     "start": "npm run build && cross-env NODE_ENV=production node build/server",
     "test": "cross-env NODE_ENV=testing jest --verbose",
     "test:unit": "cross-env NODE_ENV=testing jest --verbose --testMatch='**/src/__tests__/unit/*.test.[jt]x?(x)'",

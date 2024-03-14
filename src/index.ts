@@ -21,7 +21,7 @@ app.use(
 // initialize http logging
 if (ENV_VARIABLES.environment === "development") {
   app.use(devMorganHttpLogger);
-} else {
+} else if (ENV_VARIABLES.environment === "production") {
   app.use(prodMorganHttpLogger);
 }
 
