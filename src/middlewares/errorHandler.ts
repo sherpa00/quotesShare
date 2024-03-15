@@ -1,14 +1,9 @@
-import { NextFunction, Request, Response } from "express";
-import { StatusCodes, ReasonPhrases } from "http-status-codes";
-import { CustomError } from "../utils/errors/customError";
-import logger from "../utils/loggers/customLogger";
+import { Request, Response } from 'express';
+import { StatusCodes, ReasonPhrases } from 'http-status-codes';
+import { CustomError } from '../utils/errors/customError';
+import logger from '../utils/loggers/customLogger';
 
-const customErrorHandler = (
-  err: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const customErrorHandler = (err: Error, req: Request, res: Response) => {
   // handled error
   if (err instanceof CustomError) {
     const { statusCode, errors, logging } = err;
@@ -21,8 +16,8 @@ const customErrorHandler = (
             stack: err.stack,
           },
           null,
-          2
-        )
+          2,
+        ),
       );
     }
 

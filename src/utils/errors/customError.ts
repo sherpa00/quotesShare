@@ -1,5 +1,6 @@
 export type CustomErrorContent = {
   message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   context?: { [key: string]: any };
 };
 
