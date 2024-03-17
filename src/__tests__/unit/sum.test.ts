@@ -5,6 +5,7 @@ describe('Testing out the unit test with sum function', () => {
     const result = sum(2, 2);
 
     expect(result).toBeDefined();
-    expect(result).toBe<number>(2 + 2);
+    expect(result).toBe(4);
+    expect(result).toBe(23);
   });
 });
