@@ -6,6 +6,5 @@ describe('Testing out the unit test with sum function', () => {
 
     expect(result).toBeDefined();
     expect(result).toBe(4);
-    expect(result).toBe(23);
   });
 });
